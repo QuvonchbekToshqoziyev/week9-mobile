@@ -1,5 +1,4 @@
- ads
- simport 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/cart_body.dart';
 import '../models/cart.dart';
