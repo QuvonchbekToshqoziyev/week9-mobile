@@ -10,6 +10,8 @@ class CartBody extends StatelessWidget {
     required this.onQtyChanged,
     required this.onApplyCoupon,
     required this.couponController,
+    required this.onCheckout,
+    required this.checkoutStatus,
   });
   final CartState state;
   final void Function(Product) onAdd;
@@ -17,6 +19,8 @@ class CartBody extends StatelessWidget {
   final void Function(String, int) onQtyChanged;
   final void Function(String) onApplyCoupon;
   final TextEditingController couponController;
+  final VoidCallback onCheckout;
+  final CheckoutStatus checkoutStatus;
 
   @override
   Widget build(BuildContext context) => Column(
@@ -30,6 +34,14 @@ class CartBody extends StatelessWidget {
                   ActionChip(
                     label: Text('${product.name} · ${product.price.toStringAsFixed(0)}'),
                     onPressed: () => onAdd(product),
+                  ),
+                  const SizedBox(width: 8),
+                  FilledButton(
+                    key: const Key('checkout'),
+                    onPressed: checkoutStatus == CheckoutStatus.submitting ? null : onCheckout,
+                    child: checkoutStatus == CheckoutStatus.submitting
+                        ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                        : const Text('Checkout'),
                   ),
               ],
             ),

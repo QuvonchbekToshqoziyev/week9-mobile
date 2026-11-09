@@ -56,6 +56,7 @@ class CartState {
     this.status = CheckoutStatus.idle,
     this.orderId,
     this.checkoutError,
+    this.canUndo = false,
   });
 
   final List<CartLine> lines;
@@ -64,6 +65,7 @@ class CartState {
   final CheckoutStatus status;
   final String? orderId;
   final String? checkoutError;
+  final bool canUndo;
 
   double get subtotal => lines.subtotal;
   int get itemCount => lines.itemCount;
@@ -77,6 +79,7 @@ class CartState {
     CheckoutStatus? status,
     Object? orderId = _unset,
     Object? checkoutError = _unset,
+    bool? canUndo,
   }) =>
       CartState(
         lines: lines ?? this.lines,
@@ -87,6 +90,7 @@ class CartState {
         checkoutError: identical(checkoutError, _unset)
             ? this.checkoutError
             : checkoutError as String?,
+        canUndo: canUndo ?? this.canUndo,
       );
 
   @override
@@ -97,6 +101,7 @@ class CartState {
       other.status == status &&
       other.orderId == orderId &&
       other.checkoutError == checkoutError &&
+      other.canUndo == canUndo &&
       other.lines.length == lines.length &&
       _sameLines(other.lines);
 
@@ -112,6 +117,7 @@ class CartState {
         status,
         orderId,
         checkoutError,
+        canUndo,
         Object.hashAll(lines.map((line) => Object.hash(line.product.id, line.qty))),
       );
 }

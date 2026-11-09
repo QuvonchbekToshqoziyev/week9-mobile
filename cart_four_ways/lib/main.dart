@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'setstate/cart_page_setstate.dart';
 import 'riverpod/cart_page_riverpod.dart';
+import 'cubit/cart_page_cubit.dart';
+import 'bloc/cart_page_bloc.dart';
 
 void main() => runApp(const ProviderScope(child: CartApp()));
 
@@ -31,8 +33,14 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const RiverpodCartPage())),
               child: const Text('Riverpod cart'),
             ),
-            const FilledButton(onPressed: null, child: Text('Cubit cart · Part 4')),
-            const FilledButton(onPressed: null, child: Text('Bloc cart · Part 5')),
+            FilledButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CubitCartPage())),
+              child: const Text('Cubit cart'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const BlocCartPage())),
+              child: const Text('Bloc cart'),
+            ),
           ],
         ),
       );
